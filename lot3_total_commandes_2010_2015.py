@@ -1,5 +1,6 @@
 import happybase
 import pandas as pd
+import matplotlib.pyplot as plt
 
 """
 Ce programme : 
@@ -46,3 +47,15 @@ grouped_df = df.groupby(['cf:yearcde', 'cf:codcde']).size()
 grouped_df = grouped_df.groupby('cf:yearcde').size().reset_index(name='total')
 
 connection.close()
+
+# Export des données en barplot dans un Fichier PDF
+# Création du barplot
+plt.bar(grouped_df['cf:yearcde'], grouped_df['cf:total'])
+
+# Ajout de titres et d'étiquettes
+plt.title('Nombre de commandes de l\'année 2010 à 2015')
+plt.xlabel('Années')
+plt.ylabel('Total commandes')
+
+# Export du barplot
+plt.savefig("resultats/lot3/BarPlot_total_commandes_2010_2015.pdf")
